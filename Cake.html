@@ -250,6 +250,17 @@
 
     #img1 { top: 15vmin; left: 15vmin; }
     #img2 { top: 15vmin; right: 15vmin; }
+
+    /* Heart emoji */
+    .heart-emoji {
+      position: absolute;
+      display: none;
+      font-size: 20vmin;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -281,6 +292,9 @@
     <!-- Images inside heart -->
     <img id="img1" class="heart-img" src="mwah.jpg" alt="pic1">
     <img id="img2" class="heart-img" src="mwah2.jpg" alt="pic2">
+
+    <!-- Heart emoji -->
+    <div id="heartEmoji" class="heart-emoji">🫶🏻</div>
   </div>
 
   <script>
@@ -295,8 +309,14 @@
       const ck2 = document.getElementById("ck2").checked;
       const ck3 = document.getElementById("ck3").checked;
       const wrapper = document.getElementById("wrapper");
+      const heartEmoji = document.getElementById("heartEmoji");
+
+      // Throb effect when all clicked
       if (ck1 && ck2 && ck3) wrapper.classList.add("throb");
       else wrapper.classList.remove("throb");
+
+      // Show emoji only when "you" is clicked
+      heartEmoji.style.display = ck3 ? "block" : "none";
     }
 
     function toggleImg(id) {
