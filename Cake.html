@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Birthday Cake</title>
+  <title>Birthday Surprise</title>
   <style>
+    /* === Cake Styles === */
     body {
       background-color: #333;
       display: flex;
@@ -19,6 +20,7 @@
       position: relative;
       width: 250px;
       height: 200px;
+      cursor: pointer;
     }
 
     .plate {
@@ -84,10 +86,7 @@
       bottom: 6px;
       left: 5px;
       background-color: #f5e9d6;
-      box-shadow:
-        0 0 4px #f9edde,
-        0 0 4px #f9edde,
-        0 0 4px #f9edde;
+      box-shadow: 0 0 4px #f9edde, 0 0 4px #f9edde, 0 0 4px #f9edde;
       border-radius: 50%;
       z-index: 1;
     }
@@ -101,27 +100,9 @@
       background-color: #f0e4d0;
     }
 
-    .drip1 {
-      top: 53px;
-      left: 5px;
-      transform: skewY(15deg);
-      height: 48px;
-      width: 40px;
-    }
-
-    .drip2 {
-      top: 69px;
-      left: 181px;
-      transform: skewY(-15deg);
-    }
-
-    .drip3 {
-      top: 54px;
-      left: 90px;
-      width: 80px;
-      border-bottom-left-radius: 40px;
-      border-bottom-right-radius: 40px;
-    }
+    .drip1 { top: 53px; left: 5px; transform: skewY(15deg); height: 48px; width: 40px; }
+    .drip2 { top: 69px; left: 181px; transform: skewY(-15deg); }
+    .drip3 { top: 54px; left: 90px; width: 80px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; }
 
     .candle {
       background-color: #7B020B;
@@ -156,13 +137,13 @@
       left: 50%;
       margin-left: -7.5px;
       z-index: 11;
-      box-shadow:
-        0 0 10px rgba(255,165,0,0.5),
-        0 0 20px rgba(255,165,0,0.5),
-        0 0 60px rgba(255,165,0,0.5),
-        0 0 80px rgba(255,165,0,0.5);
+      box-shadow: 0 0 10px rgba(255,165,0,0.5),
+                  0 0 20px rgba(255,165,0,0.5),
+                  0 0 60px rgba(255,165,0,0.5),
+                  0 0 80px rgba(255,165,0,0.5);
       transform-origin: 50% 90%;
       animation: flicker 1s ease-in-out alternate infinite;
+      cursor: pointer;
     }
 
     @keyframes flicker {
@@ -173,32 +154,107 @@
       100% { transform: skewX(5deg); }
     }
 
-    /* 🎂 Birthday text on cake — MADE BIGGER + lowered so candle doesn't overlap */
     .cake-text {
       position: absolute;
-      top: 25px; /* moved a bit lower so the candle stays clear */
+      top: 25px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 28px; /* bigger */
-      line-height: 1;
+      font-size: 28px;
       font-weight: 800;
       font-family: 'Brush Script MT', 'Comic Sans MS', cursive, sans-serif;
       color: #7B020B;
       text-align: center;
-      width: 230px; /* slightly wider to fit larger text */
+      width: 230px;
       z-index: 20;
       text-shadow: 0 1px 0 #fff, 0 0 6px rgba(255,77,166,0.45);
     }
 
-    /* small screens: scale down a touch so the text doesn't overflow */
-    @media (max-width: 360px) {
-      .cake { transform: scale(0.95); }
-      .cake-text { font-size: 24px; top: 34px; width: 210px; }
+    .blow-text {
+      margin-top: 20px;
+      font-size: 22px;
+      color: #fff;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff3399, 0 0 30px #ff66cc;
+      animation: glow 1.5s ease-in-out infinite alternate;
     }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ff66b2, 0 0 10px #ff3399, 0 0 20px #ff66cc; }
+      to { text-shadow: 0 0 20px #ff99cc, 0 0 30px #ff66b2, 0 0 40px #ff3399; }
+    }
+
+    /* === ILY Animation Styles === */
+    @import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
+
+    @keyframes throb {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.2); }
+      85% { transform: scale(1); }
+    }
+
+    .wrapper {
+      display: none;
+      width: 90vmin;
+      height: 90vmin;
+      position: relative;
+      margin: 5vmin auto;
+      font-family: 'Shadows+Into+Light', cursive;
+      color: #111;
+    }
+
+    .throb { animation: throb 0.5s infinite; animation-delay: 0.8s; }
+
+    input[type="checkbox"] { display: none; }
+    input[type="checkbox"] + label {
+      width: 30vmin; height: 30vmin; line-height: 30vmin;
+      display: inline-block; position: absolute;
+      font-size: 30vmin; text-align: center;
+      transition: all 1s ease;
+    }
+
+    label { text-shadow: 3vmin 3vmin 10vmin rgba(0,0,0,0.5); }
+    label:hover { color: #c32a2a; cursor: pointer; }
+
+    #ck1 + label, #ck2 + label { border-radius: 50%; top: 0; }
+    #ck1:checked + label, #ck2:checked + label, #ck3:checked + label {
+      background: #c32a2a; font-size: 0; transition: all 1s ease;
+    }
+
+    #ck1 + label { left: 0; }
+    #ck2 + label { right: 10vmin; }
+
+    #ck1:checked + label, #ck2:checked + label {
+      width: 54vmin; height: 54vmin; border-radius: 50%; line-height: 54vmin;
+    }
+    #ck2:checked + label { right: 0; }
+
+    #ck3 + label { bottom: 5vmin; left: 50%; margin: 0 -9vmin; }
+    #ck3:checked + label {
+      width: 49.5vmin; height: 49.5vmin;
+      bottom: 17.28vmin; left: 29.16vmin;
+      transform: rotate(45deg); line-height: 4.86vmin;
+    }
+
+    span { position: absolute; bottom: 0; left: 0; font-size: 6vmin; color: #999; }
+
+    /* Images inside heart */
+    .heart-img {
+      position: absolute;
+      display: none;
+      width: 20vmin;
+      height: 20vmin;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+
+    #img1 { top: 15vmin; left: 15vmin; }
+    #img2 { top: 15vmin; right: 15vmin; }
   </style>
 </head>
 <body>
-  <div class="cake">
+  <!-- Cake -->
+  <div class="cake" id="cake">
     <div class="plate"></div>
     <div class="layer layer-bottom"></div>
     <div class="layer layer-middle"></div>
@@ -207,11 +263,46 @@
     <div class="drip drip1"></div>
     <div class="drip drip2"></div>
     <div class="drip drip3"></div>
-    <div class="candle">
-      <div class="flame"></div>
-    </div>
-
+    <div class="candle"><div class="flame" id="flame"></div></div>
     <div class="cake-text">Happy 19th Birthday<br>my dezuriyy 💖</div>
   </div>
+  <p class="blow-text" id="blowText">Blow the candle baby ✨</p>
+
+  <!-- ILY Animation -->
+  <div class="wrapper" id="wrapper">
+    <input type="checkbox" id="ck1" onclick="toggleImg('img1'); checkAll()"/>
+    <label for="ck1">I</label>
+    <input type="checkbox" id="ck2" onclick="toggleImg('img2'); checkAll()"/>
+    <label for="ck2">love</label>
+    <input type="checkbox" id="ck3" onclick="checkAll()"/>
+    <label for="ck3">you</label>
+    <span>(Click on words)</span>
+
+    <!-- Images inside heart -->
+    <img id="img1" class="heart-img" src="mwah.jpg" alt="pic1">
+    <img id="img2" class="heart-img" src="mwah2.jpg" alt="pic2">
+  </div>
+
+  <script>
+    document.getElementById("flame").addEventListener("click", function() {
+      document.getElementById("cake").style.display = "none";
+      document.getElementById("blowText").style.display = "none";
+      document.getElementById("wrapper").style.display = "block";
+    });
+
+    function checkAll() {
+      const ck1 = document.getElementById("ck1").checked;
+      const ck2 = document.getElementById("ck2").checked;
+      const ck3 = document.getElementById("ck3").checked;
+      const wrapper = document.getElementById("wrapper");
+      if (ck1 && ck2 && ck3) wrapper.classList.add("throb");
+      else wrapper.classList.remove("throb");
+    }
+
+    function toggleImg(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === "block" ? "none" : "block";
+    }
+  </script>
 </body>
 </html>
